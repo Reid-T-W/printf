@@ -14,7 +14,7 @@ int _printf(const char *format, ...)
 	int *pointer_count = &count;
 
 	va_start(list, format);
-	if (format)
+	if (format != NULL)
 	{
 		while (format[i])
 		{
