@@ -2,42 +2,23 @@
 #include <stdarg.h>
 #include <stdio.h>
 /**
+ * _printf - function used for printing any value
+ * @format: Value to print along with specifiers
+ * Return: Returns the number of characters printed
  */
 int _printf(const char *format, ...)
 {
 	int i = 0, count = 0;
 	va_list list;
-	va_start(list, format);
 
-	if(format)
+	va_start(list, format);
+	if (format)
 	{
-		while(format[i])
+		while (format[i])
 		{
-		        if(format[i] == '%')
+			if (format[i] == '%')
 			{
-				switch(format[i + 1])
-				{
-				case '%':
-					count += _putchar('%');
-					i += 2;
-					break;
-				case 'c':
-					count += _putchar(va_arg(list,int));
-					i += 2;
-					break;
-				case 's':
-					count += _prints(va_arg(list, char *));
-					i += 2;
-					break;
-				case 'd':
-				case 'i':
-					_print_num(va_arg(list,int));
-					i += 2;
-					break;
-				default:
-					++i;
-					break;
-				}
+				i = select_command(format, list, i, count);
 			}
 			else
 			{
@@ -47,6 +28,41 @@ int _printf(const char *format, ...)
 		}
 	}
 	return (count);
+}
+/**
+ * select_command - prints the required arguments and returns i
+ * @format: values to be printed
+ * @i: int
+ * @count: int
+ * @list: list of arguments
+ * Return: returns i
+ */
+int select_command(const char *format, va_list list, int i, int count)
+{
+	switch (format[i + 1])
+	{
+		case '%':
+			count += _putchar('%');
+			i += 2;
+			break;
+		case 'c':
+			count += _putchar(va_arg(list, int));
+			i += 2;
+			break;
+		case 's':
+			count += _prints(va_arg(list, char *));
+			i += 2;
+			break;
+		case 'd':
+		case 'i':
+			_print_num(va_arg(list, int));
+			i += 2;
+			break;
+		default:
+			++i;
+			break;
+	}
+	return (i);
 }
 /**
  *_putchar - prints a char
@@ -60,10 +76,14 @@ int _putchar(char c)
 }
 
 /**
+ * _prints - prints a string
+ * @s: string to be printed
+ * Return: Returns int
  */
 int _prints(char *s)
 {       int c = 0;
-	while(*s != '\0')
+
+	while (*s != '\0')
 	{
 		c += _putchar(*s);
 		s++;
@@ -72,7 +92,7 @@ int _prints(char *s)
 }
 
 /**
-* print_number - prints # using _putchar function
+* _print_num - prints # using _putchar function
 * @n: the integer to print
 *
 * Return: void
@@ -81,6 +101,7 @@ void _print_num(int n)
 {
 	int copy, nth, size = 1, ones = n % 10;
 	int c = 0;
+
 	n /= 10;
 	copy = n;
 	if (ones < 0)
