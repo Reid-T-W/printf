@@ -1,6 +1,7 @@
 #include "main.h"
 #include <stdarg.h>
 #include <stdio.h>
+#include <stdlib.h>
 /**
  * _printf - function used for printing any value
  * @format: Value to print along with specifiers
@@ -14,7 +15,7 @@ int _printf(const char *format, ...)
 	int *pointer_count = &count;
 
 	va_start(list, format);
-	if (format != NULL)
+	if (format)
 	{
 		while (format[i])
 		{
@@ -61,7 +62,8 @@ void select_command(const char *format, va_list list, int *i, int *count)
 			*i += 2;
 			break;
 		default:
-			++*i;
+			exit(EXIT_FAILURE);
+			*i += 2;
 			break;
 	}
 }
