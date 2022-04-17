@@ -18,15 +18,20 @@ int _printf(const char *format, ...)
 				switch(format[i + 1])
 				{
 				case '%':
-					_putchar('%');
+					count += _putchar('%');
 					i += 2;
 					break;
 				case 'c':
-					_putchar(va_arg(list,int));
+					count += _putchar(va_arg(list,int));
 					i += 2;
 					break;
 				case 's':
-					_prints(va_arg(list, char *));
+					count += _prints(va_arg(list, char *));
+					i += 2;
+					break;
+				case 'd':
+				case 'i':
+					_print_num(va_arg(list,int));
 					i += 2;
 					break;
 				default:
@@ -36,7 +41,7 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				_putchar(format[i]);
+				count += _putchar(format[i]);
 				++i;
 			}
 		}
@@ -48,20 +53,22 @@ int _printf(const char *format, ...)
  *@c: The char to be printed
  *Return: void
  */
-void _putchar(char c)
+int _putchar(char c)
 {
 	putchar(c);
+	return (1);
 }
 
 /**
  */
-void _prints(char *s)
-{
+int _prints(char *s)
+{       int c = 0;
 	while(*s != '\0')
 	{
-		_putchar(*s);
+		c += _putchar(*s);
 		s++;
 	}
+	return (c);
 }
 
 /**
@@ -73,13 +80,13 @@ void _prints(char *s)
 void _print_num(int n)
 {
 	int copy, nth, size = 1, ones = n % 10;
-
+	int c = 0;
 	n /= 10;
 	copy = n;
 	if (ones < 0)
 	{
 		ones *= -1, copy *= -1, n *= -1;
-		_putchar('-');
+		c += _putchar('-');
 	}
 	if (copy > 0)
 	{
@@ -90,10 +97,10 @@ void _print_num(int n)
 		while (size > 0)
 		{
 			nth = n / size;
-			_putchar('0' + nth);
+			c += _putchar('0' + nth);
 			n -= nth * size;
 			size /= 10;
 		}
 	}
-	_putchar('0' + ones);
+	c += _putchar('0' + ones);
 }
