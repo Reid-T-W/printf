@@ -56,11 +56,6 @@ void select_command(const char *format, va_list list, int *i, int *count)
 			*count += _prints(va_arg(list, char *));
 			*i += 2;
 			break;
-		case 'd':
-		case 'i':
-			_print_num(va_arg(list, int));
-			*i += 2;
-			break;
 		default:
 			exit(EXIT_FAILURE);
 			*i += 2;
