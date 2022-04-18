@@ -2,9 +2,9 @@
 
 /**
 * _print_num - prints # using _putchar function
-* @n: the integer to print
+* @l: current number
 *
-* Return: void
+* Return: length of numbers
 */
 int _print_num(va_list l)
 {

@@ -1,7 +1,7 @@
 #include "main.h"
 #include <stdarg.h>
 /**
- * _printf - function used for printing any value
+ *_printf - function used for printing any value
  * @format: Value to print along with specifiers
  * Return: Returns the number of characters printed
  */
