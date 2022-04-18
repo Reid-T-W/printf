@@ -99,7 +99,7 @@ int _prints(char *s)
 *
 * Return: void
 */
-void _print_num(int n)
+int _print_num(int n)
 {
 	int copy, nth, size = 1, ones = n % 10;
 	int c = 0;
@@ -126,4 +126,5 @@ void _print_num(int n)
 		}
 	}
 	c += _putchar('0' + ones);
+	return (c);
 }
