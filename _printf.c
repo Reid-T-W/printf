@@ -81,7 +81,6 @@ void select_command(const char *format, va_list list, int *i, int *count,
 			break;
 		default:
 			_putchar('%');
-			*error = 1;
 	}
 }
 /**
