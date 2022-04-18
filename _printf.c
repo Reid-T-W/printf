@@ -1,7 +1,6 @@
 #include "main.h"
 #include <stdarg.h>
 #include <stdio.h>
-#include <stdlib.h>
 /**
  * _printf - function used for printing any value
  * @format: Value to print along with specifiers
@@ -9,22 +8,19 @@
  */
 int _printf(const char *format, ...)
 {
-	int i = 0, count = 0, error = 0;
+	int i = 0, count = 0;
 	va_list list;
 	int *pointer_i = &i;
 	int *pointer_count = &count;
-	int *pointer_error = &error;
 
 	va_start(list, format);
 	if (format)
 	{
-		while (format[i] != '\0')
+		while (format[i])
 		{
 			if (format[i] == '%')
 			{
-				select_command(format, list, pointer_i, pointer_count, pointer_error);
-				if (error == 1)
-					return (count);
+				select_command(format, list, pointer_i, pointer_count);
 			}
 			else
 			{
@@ -32,7 +28,6 @@ int _printf(const char *format, ...)
 				++i;
 			}
 		}
-		va_end(list);
 	}
 	return (count);
 }
@@ -42,15 +37,10 @@ int _printf(const char *format, ...)
  * @i: int
  * @count: int
  * @list: list of arguments
- * @error: error flag
  * Return: returns i
  */
-void select_command(const char *format, va_list list, int *i, int *count,
-		int *error)
+void select_command(const char *format, va_list list, int *i, int *count)
 {
-	char *string;
-	char character;
-
 	switch (format[*i + 1])
 	{
 		case '%':
@@ -58,29 +48,22 @@ void select_command(const char *format, va_list list, int *i, int *count,
 			*i += 2;
 			break;
 		case 'c':
-			character = va_arg(list, int);
-			if (character != 0)
-				*count += _putchar(character);
-			else
-			{
-				_putchar('%');
-				*error = 1;
-			}
+			*count += _putchar(va_arg(list, int));
 			*i += 2;
 			break;
 		case 's':
-			string = va_arg(list, char *);
-			if (string != NULL)
-				*count += _prints(string);
-			else
-			{
-				_putchar('%');
-				*error = 1;
-			}
+			*count += _prints(va_arg(list, char *));
+			*i += 2;
+			break;
+		case 'd':
+		case 'i':
+			_print_num(va_arg(list, int));
 			*i += 2;
 			break;
 		default:
-			_putchar('%');
+			*count = _putchar('%');
+			++*i;
+			break;
 	}
 }
 /**
