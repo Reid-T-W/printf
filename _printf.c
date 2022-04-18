@@ -9,10 +9,11 @@
  */
 int _printf(const char *format, ...)
 {
-	int i = 0, count = 0;
+	int i = 0, count = 0, error = 0;
 	va_list list;
 	int *pointer_i = &i;
 	int *pointer_count = &count;
+	int *pointer_error = &error;
 
 	va_start(list, format);
 	if (format)
@@ -21,7 +22,9 @@ int _printf(const char *format, ...)
 		{
 			if (format[i] == '%')
 			{
-				select_command(format, list, pointer_i, pointer_count);
+				select_command(format, list, pointer_i, pointer_count, pointer_error);
+				if (error == 1)
+					exit(EXIT_FAILURE);
 			}
 			else
 			{
@@ -38,9 +41,11 @@ int _printf(const char *format, ...)
  * @i: int
  * @count: int
  * @list: list of arguments
+ * @error: error flag
  * Return: returns i
  */
-void select_command(const char *format, va_list list, int *i, int *count)
+void select_command(const char *format, va_list list, int *i, int *count,
+		int *error)
 {
 	switch (format[*i + 1])
 	{
@@ -58,14 +63,16 @@ void select_command(const char *format, va_list list, int *i, int *count)
 			break;
 		case ' ':
 			*count += _putchar('%');
-			exit(EXIT_FAILURE);
+			*error = 1;
 			break;
 		case '\0':
 			*count += _putchar('%');
+			*error = 1;
 			++*i;
 			break;
 		default:
 			*count += _putchar('%');
+			*error = 1;
 			++*i;
 			break;
 	}
