@@ -59,7 +59,6 @@ void select_command(const char *format, va_list list, int *i, int *count)
 		default:
 			*count += _putchar('%');
 			*count += _putchar(format[*i + 1]);
-			++*i; 
 			exit(EXIT_FAILURE);
 			break;
 	}
