@@ -42,7 +42,7 @@ int _printf(const char *format, ...)
  * Return: returns i
  */
 void select_command(const char *format, va_list list, int *i, int *count,
-	       	int *error)
+		int *error)
 {
 	switch (format[*i + 1])
 	{
