@@ -36,8 +36,9 @@ int _printf(const char *format, ...)
 /**
  * select_command - prints the required arguments and returns i
  * @format: values to be printed
- * @i: int
- * @count: int
+ * @i: int pointer
+ * @count: int pointer
+ * @error: int pointer
  * @list: list of arguments
  * Return: returns i
  */
