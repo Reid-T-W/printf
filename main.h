@@ -3,7 +3,8 @@
 #include <stdarg.h>
 
 int _printf(const char *format, ...);
-void select_command(const char *format, va_list list, int *i, int *count);
+void select_command(const char *format, va_list list, int *i, int *count,
+		int *error);
 int _putchar(char c);
 int _prints(char *s);
 int _printint(int i);
