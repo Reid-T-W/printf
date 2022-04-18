@@ -47,6 +47,9 @@ int _printf(const char *format, ...)
 void select_command(const char *format, va_list list, int *i, int *count,
 		int *error)
 {
+	char *string;
+	char character;
+
 	switch (format[*i + 1])
 	{
 		case '%':
@@ -54,14 +57,23 @@ void select_command(const char *format, va_list list, int *i, int *count,
 			*i += 2;
 			break;
 		case 'c':
-			*count += _putchar(va_arg(list, int));
+			character = va_arg(list, int);
+			if (character != 0)
+				*count += _putchar(character);
+			else
+				*error = 1;
 			*i += 2;
 			break;
 		case 's':
-			*count += _prints(va_arg(list, char *));
+			string = va_arg(list, char *);
+			if (string != NULL)
+				*count += _prints(string);
+			else
+				*error = 1;
 			*i += 2;
 			break;
 		case ' ':
+			_putchar('%');
 			*error = 1;
 			++*i;
 			break;
