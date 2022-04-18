@@ -24,7 +24,7 @@ int _printf(const char *format, ...)
 			{
 				select_command(format, list, pointer_i, pointer_count, pointer_error);
 				if (error == 1)
-					return error;
+					return count;
 			}
 			else
 			{
