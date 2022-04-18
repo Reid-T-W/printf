@@ -32,6 +32,7 @@ int _printf(const char *format, ...)
 				++i;
 			}
 		}
+		va_end(list);
 	}
 	return (count);
 }
@@ -77,11 +78,6 @@ void select_command(const char *format, va_list list, int *i, int *count,
 				*error = 1;
 			}
 			*i += 2;
-			break;
-		default:
-			*count += _putchar('%');
-			*error = 0;
-			++*i;
 			break;
 	}
 }
