@@ -61,6 +61,7 @@ void select_command(const char *format, va_list list, int *i, int *count,
 			if (character != 0)
 				*count += _putchar(character);
 			else
+				_putchar('%');
 				*error = 1;
 			*i += 2;
 			break;
@@ -69,6 +70,7 @@ void select_command(const char *format, va_list list, int *i, int *count,
 			if (string != NULL)
 				*count += _prints(string);
 			else
+				_putchar('%');
 				*error = 1;
 			*i += 2;
 			break;
