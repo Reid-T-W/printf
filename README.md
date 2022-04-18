@@ -21,7 +21,7 @@ The specifiers can also be used in combination as shown below
 
 #Contributors
 There are two contributers to this repository
-<a href = "https://github.com/Tanu-N-Prabhu/Python/graphs/contributors">
+<a href = "https://github.com/Reid-T-W/printf">
   <img src = "https://contrib.rocks/image?repo = Reid-T-W/printf"/>
 </a>
 
