@@ -20,7 +20,7 @@ The format specifiers `%s`, `%c`, `%i`, `%d` are used to provide this functional
 |	Print Character	|	%c		|	_printf("Print a character %c, 'A')	|	Print a character A	|
 |	Print Integer	|	%d		|	_printf("Print integer %d, 12)		|	Print integer 12	|
 
-The specifiers can also be used in combination as shown below
+The specifiers can also be used in combination as shown below  
 `_printf("Print a %s and the integer %d, "string", 100)` outputs `Print a string and the integer 100`
 
 # Contributors
