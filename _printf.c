@@ -35,7 +35,6 @@ int _printf(const char *format, ...)
  * @format: values to be printed
  * @i: int pointer
  * @count: int pointer
- * @error: int pointer
  * @list: list of arguments
  * Return: returns i
  */
@@ -49,7 +48,6 @@ void select_command(const char *format, va_list list, int *i, int *count)
 			break;
 		case 'c':
 			*count += _printc(list);
-			_printc(list);
 			*i += 2;
 			break;
 		case 's':
@@ -57,6 +55,10 @@ void select_command(const char *format, va_list list, int *i, int *count)
 			*i += 2;
 			break;
 		case 'd':
+			*count += _print_num(list);
+			_print_num(list);
+			*i += 2;
+			break;
 		case 'i':
 			*count += _print_num(list);
 			_print_num(list);
@@ -64,7 +66,8 @@ void select_command(const char *format, va_list list, int *i, int *count)
 			break;
 		default:
 			*count += _putchar('%');
-			++*i;
+			*count += _putchar(format[*i + 1]);
+			*i += 2;
 			break;
 	}
 }
