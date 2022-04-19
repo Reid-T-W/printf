@@ -11,6 +11,8 @@ int _printf(const char *format, ...)
 	va_list list;
 	int *pointer_i = &i;
 	int *pointer_count = &count;
+	int error = 0;
+	int *pointer_error = &error;
 
 	va_start(list, format);
 	if (format)
@@ -19,7 +21,7 @@ int _printf(const char *format, ...)
 		{
 			if (format[i] == '%')
 			{
-				select_command(format, list, pointer_i, pointer_count);
+				select_command(format, list, pointer_i, pointer_count, pointer_error);
 			}
 			else
 			{
@@ -33,12 +35,14 @@ int _printf(const char *format, ...)
 /**
  * select_command - prints the required arguments and returns i
  * @format: values to be printed
- * @i: int
- * @count: int
+ * @i: int pointer
+ * @count: int pointer
+ * @error: int pointer
  * @list: list of arguments
  * Return: returns i
  */
-void select_command(const char *format, va_list list, int *i, int *count)
+void select_command(const char *format, va_list list, int *i, int *count,
+		int *error)
 {
 	switch (format[*i + 1])
 	{
