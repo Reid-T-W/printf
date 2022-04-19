@@ -3,7 +3,7 @@
 Implementing C's printf function 
 # Description
 
-This printf project replicates the main features of c's printf function. 
+This printf project replicates the main features of c's printf function. It sends a formated string to the standard output. The format string includes the instructions to mix seversal strings (format specifiers, width modifiers, flags etc) and produce the final string to be printed on the screen.
 ## Functionalities
 
 This function covers the following functionalities
