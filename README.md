@@ -3,7 +3,9 @@
 Implementing C's printf function 
 # Description
 
-This printf project replicates the main features of c's printf function. It sends a formated string to the standard output. The format string includes the instructions to mix seversal strings (format specifiers, width modifiers, flags etc) and produce the final string to be printed on the screen.
+This printf project replicates the main features of c's printf function. It sends a formated string to thestandard output. The output is written under the control of a format string that specifies how the subsequent arguments are processed for output.
+
+The format string is composed of zero or more directives: ordinary  characters (not  %), which are copied unchanged to the output stream; and conversion specifications, each of which results in fetching zero or more subsequent arguments.  Each conversion specification is introduced by the character %, and ends with a conversion specifier.  In between there may be (in this order) zero or more flags, an optional minimum field width, an optional precision and an optional length modifier.
 ## Functionalities
 
 This function covers the following functionalities
