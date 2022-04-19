@@ -1,73 +1,47 @@
 #include "main.h"
-#include <stdarg.h>
+
 /**
- *_printf - function used for printing any value
- * @format: Value to print along with specifiers
- * Return: Returns the number of characters printed
+ * _printf - produces output according to a format
+ * @format: format string containing the characters and the specifiers
+ * Description: this function will call the get_print() function that will
+ * determine which printing function to call depending on the conversion
+ * specifiers contained into fmt
+ * Return: length of the formatted output string
  */
 int _printf(const char *format, ...)
 {
-	int i = 0, count = 0;
-	va_list list;
-	int *pointer_i = &i;
-	int *pointer_count = &count;
-	int error = 0;
-	int *pointer_error = &error;
 
-	va_start(list, format);
-	if (format)
+	int (*pfunc)(va_list, flags_t *);
+	const char *p;
+	va_list arguments;
+	flags_t flags = {0, 0, 0};
+
+	register int count = 0;
+
+	va_start(arguments, format);
+	if (!format || (format[0] == '%' && !format[1]))
+		return (-1);
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	for (p = format; *p; p++)
 	{
-		while (format[i])
+		if (*p == '%')
 		{
-			if (format[i] == '%')
+			p++;
+			if (*p == '%')
 			{
-				select_command(format, list, pointer_i, pointer_count, pointer_error);
+				continue;
 			}
-			else
-			{
-				count += _putchar(format[i]);
-				++i;
-			}
-		}
+			while (get_flag(*p, &flags))
+				p++;
+			pfunc = get_print_func(*p);
+			count += (pfunc)
+				? pfunc(arguments, &flags)
+				: _printf("%%%c", *p);
+		} else
+			count += _putchar(*p);
 	}
+	_putchar(-1);
+	va_end(arguments);
 	return (count);
-}
-/**
- * select_command - prints the required arguments and returns i
- * @format: values to be printed
- * @i: int pointer
- * @count: int pointer
- * @error: int pointer
- * @list: list of arguments
- * Return: returns i
- */
-void select_command(const char *format, va_list list, int *i, int *count,
-		int *error)
-{
-	switch (format[*i + 1])
-	{
-		case '%':
-			*count += _putchar('%');
-			*i += 2;
-			break;
-		case 'c':
-			*count += _printc(list);
-			_printc(list);
-			*i += 2;
-			break;
-		case 's':
-			*count += _prints(list);
-			*i += 2;
-			break;
-		case 'd':
-		case 'i':
-			*count += _print_num(list);
-			_print_num(list);
-			*i += 2;
-			break;
-		default:
-			*count += _putchar('%');
-			++*i;
-			break;
-	}
 }
