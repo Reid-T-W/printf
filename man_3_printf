@@ -1,0 +1,104 @@
+.TH _printf 3 "19 April 2022" "1.0" "_printf man page"
+.SH NAME
+_printf \- replicates c's printf function
+.SH SYNOPSIS
+.B #include "main.h"
+.br
+.RS
+.br
+.B int _printf(const char *format, ...);
+.br
+.B int (*get_print_func(char fc))(va_list l, flags_t *);
+.br
+.B int get_flag(char s, flags_t *f);
+.br
+.B int _putchar(char c);
+.br
+.B int _puts(char *str);
+.br
+.B void print_number(int n);
+.br
+.B int  count_digit(int i);
+.br
+.B int print_string(va_list l, flags_t *f);
+.br
+.B int print_char(va_list l, flags_t *f);
+.br
+.B int print_int(va_list l, flags_t *f);
+.RE
+
+.SH DESCRIPTION
+This printf project replicates the main features of c's printf function. It sends a formated string to thestandard output. The output is written under the control of a format string that specifies how the subsequent arguments are processed for output.
+
+The format string is composed of zero or more directives: ordinary  characters (not  %), which are copied unchanged to the output stream; and conversion specifications, each of which results in fetching zero or more subsequent arguments.  Each conversion specification is introduced by the character %, and ends with a conversion specifier.  In between there may be (in this order) zero or more flags, an optional minimum field width, an optional precision and an optional length modifier. 
+.br
+.SS Functionalities
+This function covers the following functionalities
+.br
+.br
+.RS
+Printing Strings
+.br
+Printing characters
+.br
+Printing Numbers
+.RE
+The format specifiers 
+.B %s, 
+.B %c, 
+.B %i, 
+.B %d, 
+are used to provide this functionalities respectively
+.SH RETURN VALUE
+If the function executed successfully the number of characters printed (excluding the null byte) is returned.
+.br
+If the following two cases appear a negative value (-1) is returned
+.br
+.RS
+.B if (!format || (format[0] == '%' && !format[1]))
+.RE
+.br
+.RS
+.B if (format[0] == '%' && format[1] == ' ' && !format[2])
+.RE
+.SH USAGE EXAMPLES
+Usage examples along with their output are shown below
+.br
+Print String
+.RS
+.br
+.B _printf("Print a %s, "string") 
+.br
+.B Print a string
+.RE
+.br
+Print Character
+.RS
+.br
+.B _printf("Print a character %c, 'A')
+.br
+.B Print a character A
+.RE
+.br
+Print Number
+.RS
+.B _printf("Print number %d, 12)
+.br
+.B Print number 12
+.br
+.br
+.B _printf("Print number %i, 81)
+.br
+.B Print number 81
+.RE
+Print Combinations
+.RS
+.br
+.B _printf("Print a %s and the integer %d, "string", 100)
+.br
+.B Print a string and the integer 100
+.RE 
+.SH BUGS
+No known bugs.
+.SH AUTHOR
+Gadisa Asfaw | Rediet Tadesse
