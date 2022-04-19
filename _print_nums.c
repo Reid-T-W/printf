@@ -1,38 +1,68 @@
 #include "main.h"
 
 /**
-* _print_num - prints # using _putchar function
-* @l: current number
-*
-* Return: length of numbers
-*/
-int _print_num(va_list l)
+ * print_int - prints an integer
+ * @l: va_list of arguments from _printf
+ * @f: pointer to the struct flags determining
+ * if a flag is passed to _printf
+ * Return: number of char printed
+ */
+int print_int(va_list l, flags_t *f)
 {
 	int n = va_arg(l, int);
-	int copy, nth, size = 1, ones = n % 10;
-	int c = 0;
+	int res = count_digit(n);
 
-	n /= 10;
-	copy = n;
-	if (ones < 0)
+	if (f->space == 1 && f->plus == 0 && n >= 0)
+		res += _putchar(' ');
+	if (f->plus == 1 && n >= 0)
+		res += _putchar('+');
+	if (n <= 0)
+		res++;
+	print_number(n);
+	return (res);
+}
+
+/**
+ * print_number - helper function that loops through
+ * an integer and prints all its digits
+ * @n: integer to be printed
+ */
+void print_number(int n)
+{
+	unsigned int n1;
+
+	if (n < 0)
 	{
-		ones *= -1, copy *= -1, n *= -1;
-		c += _putchar('-');
+		_putchar('-');
+		n1 = -n;
 	}
-	if (copy > 0)
+	else
+		n1 = n;
+
+	if (n1 / 10)
+		print_number(n1 / 10);
+	_putchar((n1 % 10) + '0');
+}
+
+/**
+ * count_digit - returns the number of digits in an integer
+ * for _printf
+ * @i: integer to evaluate
+ * Return: number of digits
+ */
+int count_digit(int i)
+{
+	unsigned int d = 0;
+	unsigned int u;
+
+	if (i < 0)
+		u = i * -1;
+	else
+		u = i;
+	while (u != 0)
 	{
-		while (copy / 10 != 0)
-		{
-			copy /= 10, size *= 10;
-		}
-		while (size > 0)
-		{
-			nth = n / size;
-			c += _putchar('0' + nth);
-			n -= nth * size;
-			size /= 10;
-		}
+		u /= 10;
+		d++;
 	}
-	c += _putchar('0' + ones);
-	return (c);
+	return (d);
 }
