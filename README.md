@@ -9,7 +9,7 @@ This printf project replicates the main features of c's printf function.
 This function covers the following functionalities
 * Printing Strings
 * Printing Characters
-* Printing Integers
+* Printing Numbers
 
 The format specifiers `%s`, `%c`, `%i`, `%d` are used to provide this functionalities respectively
 ## Usage Examples
@@ -18,7 +18,8 @@ The format specifiers `%s`, `%c`, `%i`, `%d` are used to provide this functional
 |	------------	|	---------	|			--------		|		------		|	
 |	Print String	|	%s		|	_printf("Print a %s, "string")		|	Print a string		|
 |	Print Character	|	%c		|	_printf("Print a character %c, 'A')	|	Print a character A	|
-|	Print Integer	|	%d		|	_printf("Print integer %d, 12)		|	Print integer 12	|
+|	Print Number	|	%d		|	_printf("Print number %d, 12)		|	Print number 12		|
+|	Print Number	|	%i		|	_printf("Print number %i, 12)		|	Print number 12 	|
 
 The specifiers can also be used in combination as shown below  
 `_printf("Print a %s and the integer %d, "string", 100)` outputs `Print a string and the integer 100`
